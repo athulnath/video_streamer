@@ -1,0 +1,20 @@
+{
+  "name": "video_streamer",
+  "version": "1.0.0",
+  "homepage": "https://github.com/athulnath/video_streamer",
+  "authors": [
+    "athulnath <athulnath.t@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4"
+  }
+}
