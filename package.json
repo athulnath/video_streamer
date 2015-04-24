@@ -1,0 +1,24 @@
+{
+  "name": "video_streamer",
+  "version": "1.0.0",
+  "description": "video streamer with mongodb",
+  "main": "app.js",
+  "scripts": {
+	"start": "node ./bin/video_streamer.js", 
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/athulnath/video_streamer.git"
+  },
+  "author": "athulnath <athulnath.t@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/athulnath/video_streamer/issues"
+  },
+  "homepage": "https://github.com/athulnath/video_streamer",
+  "dependencies": {
+    "express": "^4.12.3",
+    "mongodb": "*"
+  }
+}
