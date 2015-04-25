@@ -7,7 +7,8 @@ var cluster = require("cluster"),
   workers = {},
   express = require("express"),
   config = require("./config/conf.json"),
-  userRouter = require("./router/User.js");
+  userRouter = require("./router/User.js"),
+  Stream = require("./router/Stream.js");
 		
 function App() {
 	
@@ -21,7 +22,7 @@ function App() {
 			res.json({message: "OK"});
 		});
 		
-		app.use("/api", userRouter);
+		app.use("/api", [userRouter, Stream]);
 		
 		app.listen(app.get("port"), function() {
 			console.log("application running on @localhost:%d", app.get("port"));
@@ -34,8 +35,6 @@ function App() {
 				var worker = (cluster.fork());
 				workers[worker.process.pid] = worker;
 			}
-
-			console.log(workers);
 			
 			cluster.on("disconnect", function(worker) {
 				console.log("worker %d disconnected", worker.process.pid);
