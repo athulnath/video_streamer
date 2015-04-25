@@ -6,7 +6,8 @@ var cluster = require("cluster"),
   numCPU = require("os").cpus().length,
   workers = {},
   express = require("express"),
-  config = require("./config/conf.json");
+  config = require("./config/conf.json"),
+  userRouter = require("./router/User.js");
 		
 function App() {
 	
@@ -19,6 +20,8 @@ function App() {
 		app.get("/", function(req, res){
 			res.json({message: "OK"});
 		});
+		
+		app.use("/api", userRouter);
 		
 		app.listen(app.get("port"), function() {
 			console.log("application running on @localhost:%d", app.get("port"));

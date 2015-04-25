@@ -1,5 +1,10 @@
 {
-	"App" : {
+	"App": {
 	  "port": 8080
+	},
+	"Database": {
+		"host": "localhost",
+		"port": 27017,
+		"db": "tutorial"
 	}
 }
