@@ -15,7 +15,6 @@ function App() {
 	this.init = function() {
 		var app = express();
 		app.set("port", process.env.PORT || config.App.port);
-		
 		app.use(express.static("../public"));
 		
 		app.get("/", function(req, res){

@@ -49,8 +49,7 @@ router.get("/video/:id", function(req, res) {
 			}
 
 			var stream = gridStore.stream(true);
-			stream.pipe(res);
-
+			
 			stream.on('data', function(data) {
 				res.write(data);
 			})
