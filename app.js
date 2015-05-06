@@ -8,14 +8,20 @@ var cluster = require("cluster"),
   express = require("express"),
   config = require("./config/conf.json"),
   userRouter = require("./router/User.js"),
-  Stream = require("./router/Stream.js");
+  Stream = require("./router/Stream.js"),
+  bodyParser = require("body-parser"),
+  path = require("path");
+
 		
 function App() {
 	
 	this.init = function() {
 		var app = express();
 		app.set("port", process.env.PORT || config.App.port);
+		
 		app.use(express.static("../public"));
+		app.use(bodyParser.urlencoded({ extended: false }));
+		app.use(bodyParser.json());
 		
 		app.get("/", function(req, res){
 			res.json({message: "OK"});

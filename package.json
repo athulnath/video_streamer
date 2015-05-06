@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/athulnath/video_streamer",
   "dependencies": {
+    "body-parser": "^1.12.3",
     "express": "^4.12.3",
-    "mongodb": "*"
+    "mongodb": "*",
+    "multiparty": "^4.1.1"
   }
 }

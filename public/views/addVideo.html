@@ -1,0 +1,25 @@
+<div class="row">
+	<div class="col-md-3">
+		<h2>Add video</h2>
+		
+		<div class="form-horizontal">
+			<form action="api/video/file-upload" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+				<label>Select video to upload:</label> 
+						<div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-primary btn-file">
+                        Browse… <input type="file" name="myvideo">
+                    </span>
+                </span>
+                <input type="text" id="videofile" class="form-control" readonly="">
+            </div>
+				</div>
+				<div class="form-group">
+				 	<input type="submit" class="btn btn-success" value="Upload" name="submit">
+				 </div>
+			</form>
+		</div>
+		
+	</div>			
+</div>

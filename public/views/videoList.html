@@ -1,0 +1,17 @@
+<div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Video store</h1>
+            </div>
+
+			<div ng-repeat="file in videoList">
+	            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+	                <a class="thumbnail" href="#/stream/{{ file._id}}">
+	                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+	                    <span>{{ file.filename }}</span>
+	                </a>
+	                		<button class="btn btn-danger" ng-click="deleteFile(file._id)">
+								<span class="glyphicon glyphicon-trach"></span>&nbsp;&nbsp;Delete
+							</button>
+	            </div>
+            </div>
+</div>

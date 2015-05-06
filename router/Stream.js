@@ -4,19 +4,23 @@
 
 var router = require("express").Router();
 var FileStreamer = require("../lib/db/dataManager/FileStreamer.js");
+var GridManager = require("../lib/db/dataManager/GridManager.js");
+var multiparty = require('multiparty');
+var util = require("util");
+var fs = require('fs');
+var path = require("path");
 
-router.get("/save", function(req, res) {
-	var filePath = "../bin/sample.mp4";
-	var fileStreamer = new FileStreamer();
-	fileStreamer.saveFile(filePath, function(err, result) {
+router.get("/files", function(req, res) {
+	
+	var gridMangerObj = new GridManager();
+	gridMangerObj.getAllFiles(function(err, list) {
 		if(err) {
 			res.sendStatus(500);
 			return;
 		}
-		if(result) {
-			res.json({message: "file saved"});
-		}
+		res.json(list);
 	});
+
 });
 
 router.get("/video/:id", function(req, res) {
@@ -58,5 +62,52 @@ router.get("/video/:id", function(req, res) {
 	});
 });
 
+router.post("/video/file-upload", function(req, res) {
+	  var form = new multiparty.Form();
+	  
+	  form.on('error', function(err) {
+		  console.log('Error parsing form: ' + err.stack);
+	  });
+
+	  form.on('part', function(part) {
+		var fileStreamer = new FileStreamer();
+				
+		if(!part.filename) {
+			part.resume();
+		}
+		
+		var filename = path.basename(part.filename, path.extname(part.filename));
+		fileStreamer.saveFile(filename, function(err, gridStore) {
+			var stream = gridStore.stream(true);
+			part.pipe(stream);
+		});
+	    
+	  });
+	  
+	  form.on('close', function() {
+		  console.log('Upload completed!');
+		  res.setHeader('content-type' , 'text/plain');
+		  res.end('Received files');
+	 });
+	  
+	  
+	  form.parse(req);  
+});
+
+router.post("/remove", function(req, res) {
+	var fileStreamer = new FileStreamer();
+	var fileId = req.body.id;
+	fileStreamer.deleteFile(fileId, function(err, flag) {
+		
+		if(err) {
+			res.sendStatus(500);
+			return;
+		}
+		
+		res.json({message : "OK"});
+		
+	});
+	
+});
 
 module.exports = router;
