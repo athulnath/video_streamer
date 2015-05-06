@@ -2,7 +2,7 @@
  * New node file
  */
 
-var videoStore = angular.module('videoStore', ['ngRoute', 'videoStoreController']);
+var videoStore = angular.module('videoStore', ['ngRoute', 'videoStoreController','angularFileUpload']);
 
 videoStore.config(['$routeProvider', function($routeProvider) {
 	$routeProvider

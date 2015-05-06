@@ -1,25 +1,41 @@
 <div class="row">
-	<div class="col-md-3">
+	<div class="col-md-6">
 		<h2>Add video</h2>
-		
+
 		<div class="form-horizontal">
-			<form action="api/video/file-upload" method="post" enctype="multipart/form-data">
-				<div class="form-group">
-				<label>Select video to upload:</label> 
-						<div class="input-group">
-                <span class="input-group-btn">
-                    <span class="btn btn-primary btn-file">
-                        Browse… <input type="file" name="myvideo">
-                    </span>
-                </span>
-                <input type="text" id="videofile" class="form-control" readonly="">
-            </div>
+
+			<div class="form-group">
+				<label>Select video to upload:</label>
+				<div class="input-group">
+					<span class="input-group-btn"> <span
+						class="btn btn-primary btn-file"> Browse… <input
+							type="file" name="myvideo" nv-file-select="" uploader="uploader">
+					</span>
+					</span> <input type="text" id="videofile" class="form-control" readonly="">
 				</div>
-				<div class="form-group">
-				 	<input type="submit" class="btn btn-success" value="Upload" name="submit">
-				 </div>
-			</form>
+			</div>
+
+			<div class="form-group">
+				<div ng-repeat="item in uploader.queue">
+					<div class="row">
+						<div class="col-sm-2">
+							<button class="btn btn-primary" ng-click="item.upload()">upload</button>
+						</div>
+						<div class="col-sm-4">
+							<div class="progress" style="">
+								<div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+	</div>
+</div>
+
+<div class="row">
 		
-	</div>			
+		<div class="alert alert-success" ng-show="fileUploadFlag">
+			File uploaded successfully!
+		</div>
 </div>

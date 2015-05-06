@@ -8,8 +8,28 @@ videoStoreController.controller('videoStreamCtrl', ['$scope', '$routeParams', fu
 	$scope.id = decodeURIComponent($routeParams.id);
 }]);
 
-videoStoreController.controller('videoAddCtrl', ['$scope', function($scope) {
+videoStoreController.controller('videoAddCtrl', ['$scope', 'FileUploader', function($scope, FileUploader) {
 
+	  $scope.fileUploadFlag = false;
+	  
+	  var uploader = $scope.uploader = new FileUploader({
+          url: 'api/video/file-upload'
+      });
+	  
+	   // CALLBACKS
+      uploader.onSuccessItem = function(fileItem, response, status, headers) {
+          console.info('onSuccessItem', fileItem, response, status, headers);
+          $scope.fileUploadFlag = true;
+      };
+      uploader.onErrorItem = function(fileItem, response, status, headers) {
+          console.info('onErrorItem', fileItem, response, status, headers);
+      };
+      uploader.onCancelItem = function(fileItem, response, status, headers) {
+          console.info('onCancelItem', fileItem, response, status, headers);
+      };
+      uploader.onCompleteItem = function(fileItem, response, status, headers) {
+          console.info('onCompleteItem', fileItem, response, status, headers);
+      };
 }]);
 
 videoStoreController.controller('videoListCtrl', ['$scope', '$http', function($scope, $http) {
