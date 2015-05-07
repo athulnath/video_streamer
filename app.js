@@ -10,7 +10,8 @@ var cluster = require("cluster"),
   userRouter = require("./router/User.js"),
   Stream = require("./router/Stream.js"),
   bodyParser = require("body-parser"),
-  path = require("path");
+  path = require("path"),
+  DBConnector = require("./lib/db/mongodb/DBConnector.js");
 
 		
 function App() {
@@ -22,6 +23,9 @@ function App() {
 		app.use(express.static("../public"));
 		app.use(bodyParser.urlencoded({ extended: false }));
 		app.use(bodyParser.json());
+	
+		DBConnector.initDB();
+	
 		
 		app.get("/", function(req, res){
 			res.json({message: "OK"});

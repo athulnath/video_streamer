@@ -9,6 +9,7 @@ var multiparty = require('multiparty');
 var util = require("util");
 var fs = require('fs');
 var path = require("path");
+var MediaConverter = require("html5-media-converter");
 
 router.get("/files", function(req, res) {
 	
@@ -77,9 +78,16 @@ router.post("/video/file-upload", function(req, res) {
 		}
 		
 		var filename = path.basename(part.filename, path.extname(part.filename));
+//		var mc = new MediaConverter({ videoFormats: ['mp4'] });
+//		var converter = mc.asStream("200x200");
 		fileStreamer.saveFile(filename, function(err, gridStore) {
-			var stream = gridStore.stream(true);
-			part.pipe(stream);
+			var gridStream = gridStore.stream(true);
+			part.pipe(gridStream);
+//			part.pipe(converter).pipe(stream);
+			
+//			part.pipe(converter).map(function(stream) {
+//			    stream.pipe(gridStream);
+//			});
 		});
 	    
 	  });
